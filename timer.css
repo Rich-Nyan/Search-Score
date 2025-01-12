@@ -1,3 +1,8 @@
+body {
+  background: url("https://www.transparenttextures.com/patterns/cubes.png");
+  background-color: #f9f9f9;
+}
+
 .title-css {
   font-size: 36px;
   font-weight: bold;
@@ -9,7 +14,28 @@
   border: 2px solid #007bff;
   border-radius: 10px;
   width: fit-content;
+  flex: 1;
 }
+
+.minLength-css {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px 20px;
+  color: #333;
+  background-color: #e1bbfa;
+  border: 2px solid #8b1cf3;
+  border-radius: 10px;
+  width: fit-content;
+}
+.title-css:hover {
+  background-color: #b7daf8;
+}
+.minLength-css:hover {
+  background-color: #ca98f5;
+}
+
 .input-css {
   font-size: 24px;
   font-weight: 300;
@@ -22,7 +48,7 @@
 #searchQuery {
   margin-left: 0px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 200px;
@@ -50,9 +76,18 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+#startButton {
+  background-color: #4bb64e;
+}
+#startButton:hover {
+  background-color: #176019;
+}
 
-button:hover {
-  background-color: #0056b3;
+#resetButton {
+  background-color: #d54d4d;
+}
+#resetButton:hover {
+  background-color: #821818;
 }
 
 #resultCount,
@@ -62,6 +97,9 @@ button:hover {
   text-align: center;
   margin: 10px 0;
   font-size: 18px;
+}
+#resultCount {
+  min-height: 20px;
 }
 
 #timer span,
@@ -76,6 +114,11 @@ button:hover {
   margin: 0;
   font-size: 18px;
   line-height: 1.6;
+  height: 300px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 #list li {
@@ -91,4 +134,41 @@ button:hover {
 #list li:hover {
   background-color: #e0e0e0;
   cursor: pointer;
+}
+
+#minLengthText {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.hover-css {
+  display: inline-block;
+  padding: 10px;
+  background-color: #474747;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: -50px;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hover-css:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }

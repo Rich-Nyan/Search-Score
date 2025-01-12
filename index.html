@@ -2,11 +2,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Search JSON API - Timer-Based Game</title>
+    <title>Search and Score</title>
     <link rel="stylesheet" href="timer.css" />
   </head>
   <body>
     <div class="title-css">Search and Score</div>
+    <div class="minLength-css">
+      <label for="minLength" id="minLengthText">Minimum Word Length:</label>
+      <input
+        type="range"
+        id="minLength"
+        min="3"
+        max="6"
+        value="3"
+        step="1"
+        onchange="updateMinLength()"
+      />
+      <span id="minLengthValue">3</span>
+    </div>
     <div id="input" class="input-css">
       <span id="prev"></span> <span id="curLetter"></span>
       <input type="text" id="searchQuery" placeholder="Enter your phrase" />
@@ -15,8 +28,8 @@
       <span id="generateRandom"></span>
     </div>
     <div class="button-css">
-      <button onclick="start()">Start</button>
-      <button onclick="reset()">Reset</button>
+      <button id="startButton" onclick="start()">Start</button>
+      <button id="resetButton" onclick="reset()">Reset</button>
     </div>
 
     <div id="resultCount"></div>
@@ -27,6 +40,14 @@
     <div id="maxscore">High Score: <span id="maxScoreValue">0</span></div>
 
     <ul id="list"></ul>
+    <div class="hover-css">
+      Help?
+      <div class="tooltip">
+        Keep the chain going by creating a valid word that starts with the given
+        letter. Earn points based on the search results for your phrase, and
+        race against the clock to maximize your score!
+      </div>
+    </div>
     <script>
       const apiKey = "AIzaSyBZpVCZKwRmfBNuZJjRQuBhEc2h68DYrso";
       const cx = "450f8832fcce44a27";
@@ -36,6 +57,15 @@
       let nextLetter = "";
       let timerValue = 60;
       let timerInterval;
+      let minWordLength = parseInt(
+        document.getElementById("minLength").value,
+        10
+      );
+
+      let minWordLengthValue = parseInt(
+        document.getElementById("minLengthValue").value,
+        10
+      );
       async function getSearchResults(query) {
         const addQuery =
           document.getElementById("prev").textContent +
@@ -67,8 +97,10 @@
 
       async function handleSearch() {
         const query = document.getElementById("searchQuery").value;
-        if (query.length < 2) {
-          alert("Word is too short! Must be at least 3 letters.");
+        if (query.length < minWordLength - 1) {
+          alert(
+            "Word is too short! Must be at least " + minWordLength + " letters."
+          );
           return;
         }
         if (query.split(" ").length > 1) {
@@ -106,18 +138,20 @@
         timerValue = 60;
         document.getElementById("timerValue").textContent = timerValue;
         updatePrev();
-        document.getElementById("searchQuery").focus();
         document.getElementById("list").innerHTML = "";
-        document.getElementById("searchQuery").disabled = false;
-        document.getElementById("searchQuery").style.backgroundColor = "";
+        document.getElementById("searchQuery").disabled = true;
+        document.getElementById("searchQuery").style.backgroundColor =
+          "#f0f0f0";
         document.querySelector('button[onclick="start()"]').disabled = false;
         document.querySelector(
           'button[onclick="start()"]'
         ).style.backgroundColor = "";
+        document.getElementById("minLength").disabled = false;
       }
 
       function generateRandom() {
-        const letters = "abcdefghijklmnopqrstuvwxyz";
+        const letters =
+          "aaaaaaaabbccccddddeeeeeeeeeeeffggghhhiiiiiiiiijkllllllmmmnnnnnnnnooooooopppqrrrrrrrrssssssssstttttttuuuuvwxyyz";
         return letters[Math.floor(Math.random() * letters.length)];
       }
 
@@ -135,8 +169,12 @@
         timerInterval = setInterval(() => {
           if (timerValue > 0) {
             timerValue--;
+            document.getElementById("searchQuery").disabled = false;
+            document.getElementById("searchQuery").style.backgroundColor = "#";
             document.getElementById("timerValue").textContent = timerValue;
+            document.getElementById("searchQuery").focus();
             document.querySelector('button[onclick="start()"]').disabled = true;
+            document.getElementById("minLength").disabled = true;
             document.querySelector(
               'button[onclick="start()"]'
             ).style.backgroundColor = "#f0f0f0";
@@ -156,12 +194,25 @@
         }, 1000);
       }
 
+      function updateMinLength() {
+        let value = parseInt(document.getElementById("minLength").value, 10);
+
+        if (value < 3) {
+          value = 3;
+        } else if (value > 6) {
+          value = 6;
+        }
+
+        minWordLength = value;
+        document.getElementById("minLength").value = minWordLength;
+        document.getElementById("minLengthValue").textContent = minWordLength;
+      }
       window.onload = () => {
         updatePrev();
-        document.getElementById("searchQuery").disabled = false;
-        document.getElementById("searchQuery").style.backgroundColor = "";
+        document.getElementById("searchQuery").disabled = true;
+        document.getElementById("searchQuery").style.backgroundColor =
+          "#f0f0f0";
         const searchBox = document.getElementById("searchQuery");
-        searchBox.focus();
 
         searchBox.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
