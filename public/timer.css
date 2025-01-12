@@ -1,0 +1,94 @@
+.title-css {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px 20px;
+  color: #333;
+  background-color: #f0f8ff;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  width: fit-content;
+}
+.input-css {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+
+#curLetter {
+  margin-right: 0px;
+}
+#searchQuery {
+  margin-left: 0px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.random-css {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+  margin: 10px 0;
+}
+.button-css {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+button {
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#resultCount,
+#timer,
+#score,
+#maxscore {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+#timer span,
+#score span,
+#maxscore span {
+  font-weight: bold;
+}
+
+#list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+#list li {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+#list li:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
